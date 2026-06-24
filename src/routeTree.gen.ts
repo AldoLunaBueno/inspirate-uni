@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OvpgsRouteImport } from './routes/ovpgs'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as OpenDayRouteImport } from './routes/OpenDay'
+import { Route as LoginRouteImport } from './routes/Login'
+import { Route as IgirlRouteImport } from './routes/Igirl'
 import { Route as IndexRouteImport } from './routes/index'
 
+const OvpgsRoute = OvpgsRouteImport.update({
+  id: '/ovpgs',
+  path: '/ovpgs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpenDayRoute = OpenDayRouteImport.update({
+  id: '/OpenDay',
+  path: '/OpenDay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/Login',
+  path: '/Login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IgirlRoute = IgirlRouteImport.update({
+  id: '/Igirl',
+  path: '/Igirl',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,90 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Igirl': typeof IgirlRoute
+  '/Login': typeof LoginRoute
+  '/OpenDay': typeof OpenDayRoute
+  '/eventos': typeof EventosRoute
+  '/ovpgs': typeof OvpgsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Igirl': typeof IgirlRoute
+  '/Login': typeof LoginRoute
+  '/OpenDay': typeof OpenDayRoute
+  '/eventos': typeof EventosRoute
+  '/ovpgs': typeof OvpgsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Igirl': typeof IgirlRoute
+  '/Login': typeof LoginRoute
+  '/OpenDay': typeof OpenDayRoute
+  '/eventos': typeof EventosRoute
+  '/ovpgs': typeof OvpgsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/Igirl' | '/Login' | '/OpenDay' | '/eventos' | '/ovpgs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/Igirl' | '/Login' | '/OpenDay' | '/eventos' | '/ovpgs'
+  id:
+    | '__root__'
+    | '/'
+    | '/Igirl'
+    | '/Login'
+    | '/OpenDay'
+    | '/eventos'
+    | '/ovpgs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IgirlRoute: typeof IgirlRoute
+  LoginRoute: typeof LoginRoute
+  OpenDayRoute: typeof OpenDayRoute
+  EventosRoute: typeof EventosRoute
+  OvpgsRoute: typeof OvpgsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ovpgs': {
+      id: '/ovpgs'
+      path: '/ovpgs'
+      fullPath: '/ovpgs'
+      preLoaderRoute: typeof OvpgsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/OpenDay': {
+      id: '/OpenDay'
+      path: '/OpenDay'
+      fullPath: '/OpenDay'
+      preLoaderRoute: typeof OpenDayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Login': {
+      id: '/Login'
+      path: '/Login'
+      fullPath: '/Login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Igirl': {
+      id: '/Igirl'
+      path: '/Igirl'
+      fullPath: '/Igirl'
+      preLoaderRoute: typeof IgirlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +145,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IgirlRoute: IgirlRoute,
+  LoginRoute: LoginRoute,
+  OpenDayRoute: OpenDayRoute,
+  EventosRoute: EventosRoute,
+  OvpgsRoute: OvpgsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
